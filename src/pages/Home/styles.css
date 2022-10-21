@@ -1,0 +1,7 @@
+.loading{
+    width: 100vw;
+    display: flex;
+    alignItems: center;
+    justifyContent: center;
+    z-index: 7;
+}
