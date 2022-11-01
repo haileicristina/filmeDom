@@ -17,9 +17,9 @@ const Header = ({info}) => {
         return `${month}/${year}`
     }
    
-    let dateMovie =  new Date(info.release_date);
+    let dateMovie =  new Date(info.first_air_date);
     let datas = formatDate(dateMovie);
-
+    console.log('Datas', info.release_date)
 
     
     return(       
@@ -31,11 +31,11 @@ const Header = ({info}) => {
         }>
            <div className='featured--vertical'>
                 <div className='featured--horizontal'>
-                    <div className="featured--name">{info.title}</div>
+                    <div className="featured--name">{info.name}</div>
                    
                     <div className="featured--info">
                         <div className="featured--points">{info?.vote_average} pontos </div>
-                        <div className="featured--year">{datas}</div>
+                        <div className="featured--year">{datas === '0NaN/NaN'? '' : datas}</div>
                         <div className="featured--language">  {info.original_language === 'en'? ' Aúdio: Inglês' : ''}</div>
                     </div>
 

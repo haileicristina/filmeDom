@@ -1,30 +1,12 @@
-import { useEffect, useState } from "react";
-import {getMovies} from '../../../services/categories';
+import { useState } from "react";
+import {Link} from 'react-router-dom';
 import './styles.css';
 import { CaretLeft, CaretRight } from "phosphor-react";
 
 const Row = ({title, path, isLarge}) =>{
-    const [movies, setMovies] = useState([]);
+    
     const [scrollx, setScrollx] = useState(0);
    
-
-    const listFilmes = async(_path)  => {
-        try{
-            const data = await getMovies(_path);            
-            setMovies(data?.results);
-            
-            
-        }
-        catch(error){
-            console.log('Error list filmes', error)
-            
-        }
-    };
-
-    useEffect(() => {
-        listFilmes(path);
-       
-    }, [path])
 
     
    const handleLeftArrow = () => {
@@ -36,7 +18,7 @@ const Row = ({title, path, isLarge}) =>{
    }
    const handleRightArrow = () => {
     let x = scrollx - Math.round(window.innerWidth / 2);
-    let listW = movies.length * 100;
+    let listW = path.results.length * 100;
     if((window.innerWidth - listW) > x){
         x = (window.innerWidth - listW) - 60;
     }
@@ -56,19 +38,22 @@ const Row = ({title, path, isLarge}) =>{
                 <CaretRight size={50} weight='bold'/>
             </div>
 
-
+           
             <div className="row-cards" style={{
                 marginLeft: scrollx,
                // width: movies.length * 150
             }}>
-                    {movies.length > 0 && movies?.map((movie)=>{
+                
+                    {path.length > 0 && path?.map((movie)=>{
+                        
                         return(
+                           
                             <img className={`movie-card ${isLarge && "movie-card-large"}`}
                             key={movie.id}
                             src={`https://image.tmdb.org/t/p/original/${ isLarge ? movie.backdrop_path : movie.poster_path}`}
                             alt={movie.name}
                             />
-                        
+                            
                         )
                     })}
             </div>

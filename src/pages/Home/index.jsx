@@ -1,12 +1,12 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 
-import {categories} from '../../services/categories';
-import api from '../../services/api';
 
 import Header from '../../components/Header';
 import TopLogo from '../../components/TopLogo';
 import Row from "./Row";
+import {getMovies} from "../../services/categories";
+
 
 import {CircleNotch} from 'phosphor-react';
 import './styles.css';
@@ -15,30 +15,27 @@ import Footer from "../../components/Footer";
 function Home(){
 
     const [featuresMovies, setFeaturesMovies] = useState([]);
+    const [movieList, setMovieList] = useState([]);
     const [headerTopBlack, setHeaderTopBlack] = useState(false);
    const [positionCurrent, setPositionCurrent] = useState(0);
   
     useEffect(() => {
 
-        async function getFieatured(id){
-            const response = await api.get(`discover/movie/`,{
-                params:{
-                    api_key:'2078d068789908483254ee34ad1e87d6',
-                    language:'pt-BR',
-                    page: 1,
-                }
-            })
-           // console.log(response.data.results);
+        async function getFieatured(){
+            const response = await getMovies();
+            console.log('Movies',response);
             
-           const list = response.data.results;   
+           const list = response;   
+          
                
-       
-
-       let sortMovie = Math.floor(Math.random() * (list.length -1));
-       let chosen = list[sortMovie];
-       let infoFilm = chosen;
-       console.log(infoFilm);
-      setFeaturesMovies(infoFilm);
+           setMovieList(list);
+           let originals = list.filter(i => i.name === 'originals');
+           const item = originals[0].path;
+           let sortMovie = Math.floor(Math.random() * (item.length-1));
+          // console.log('Lista',sortMovie)
+           let chosen = item[sortMovie];                    
+           console.log('Filmes',chosen);
+          setFeaturesMovies(chosen);
       
       
     
@@ -78,7 +75,7 @@ function Home(){
        
        <div> 
 
-        {categories.length <= 0 &&
+        {movieList.length <= 0 &&
         <div>
             
         <CircleNotch size={100} color="#de7017" weight="fill" className="loading" />
@@ -87,12 +84,12 @@ function Home(){
 
         {featuresMovies &&
         <Header info={featuresMovies} />
-        }       
+    }      
        </div>
 
        
 
-        {categories.map((category) =>{
+        {movieList.map((category) =>{
             return (              
                 
                  <Row

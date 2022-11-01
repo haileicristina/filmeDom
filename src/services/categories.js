@@ -1,48 +1,61 @@
-//import axios from 'axios';
+import axios from 'axios';
+import api from '../services/api';
+
+
 const API_KEY = '2078d068789908483254ee34ad1e87d6';
-export const categories = [
-    {
-        name: 'trending',
-        title: 'Em alta',
-        path: `/trending/all/week?api_key=${API_KEY}&language=pt-BR`,
-        isLarge: true
-    },
-    {
-        name: 'netflixOriginals',
-        title: 'Originais Netflix',
-        path: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
-        isLarge: false
-    },
-    {
-        name: 'topRated',
-        title: 'Populares',
-        path: `/movie/top_rated?api_key=${API_KEY}&language=pt-BR`,
-        isLarge: false
-    },
-    {
-        name: 'comedy',
-        title: 'Comédias',
-        path: `/discover/tv?api_key=${API_KEY}&with_genres=35`,
-        isLarge: false
-    },
-    
-    {
-        name: 'documentaries',
-        title: 'Documentários',
-        path: `/discover/tv?api_key=${API_KEY}&with_genres=99`,
-        isLarge: false
-    },
+const API_BASE = `https://api.themoviedb.org/3/`;
+
+
+
+export const getMovies = async () =>{
+  {
+     
+    return [
+        {
+            name: 'trending',
+            title: 'Em alta',
+            path: await baseApi(`/trending/all/week?language=pt-BR&api_key=${API_KEY}`),
+            isLarge: true
+        },
+        {
+            name: 'originals',
+            title: 'Originais Netflix',
+            path: await baseApi(`/discover/tv?with_networks=213 &api_key=${API_KEY}`),
+            isLarge: false
+        },
+        {
+            name: 'topRated',
+            title: 'Populares',
+            path: await baseApi(`/movie/top_rated?language=pt-BR&api_key=${API_KEY}`),
+            isLarge: false
+        },
+        {
+            name: 'comedy',
+            title: 'Comédias',
+            path: await baseApi(`/discover/tv?with_genres=35&api_key=${API_KEY}`),
+            isLarge: false
+        },
+        
+        {
+            name: 'documentaries',
+            title: 'Documentários',
+            path: await baseApi(`/discover/tv?with_genres=99&api_key=${API_KEY}`),
+            isLarge: false
+        },
     ];
-    export const getMovies = async (path) => {
-        
-        try{
-            let url = `https://api.themoviedb.org/3${path}`
-            const response = await fetch(url);
-              return await response.json();              
-                         
-            }        
-        catch(error){
-            console.log('Erro de conexão com api', error)
-        
+}
+
+}
+
+export const baseApi = async(endpoint) => {
+    try{
+    const req = `${API_BASE}${endpoint}`;    
+    const infos = await axios.get(req);
+    const movies = infos.data.results;
+   // console.log('Teste Infos',infos.data.results);   
+    return movies;
+    } catch(error){
+        console.log(error);
     }
+    
 }

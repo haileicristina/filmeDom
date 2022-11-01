@@ -79,7 +79,7 @@ function Filmes(){
    
     let filmes =  new Date(filme.release_date);
     let datas = formatDate(filmes);
-       
+       console.log(filme)
 
     return(
         <>
@@ -95,7 +95,7 @@ function Filmes(){
                 <div className='resumo'>{filme.overview}
                     <div className='info'>
                         <span className='datas'>{datas}</span>
-                        <strong classname='voto'>Avaliação: {filme.vote_average}</strong>
+                        <strong className='voto'>Avaliação: {filme.vote_average}</strong>
                         <a target='blank' rel='external' href={`https://youtube.com/results?search_query=${filme.title} Trailer `} className='trailler'>Trailler</a>
                         <div onClick={salvarFilme} className='salvar'>Salvar</div>
                         <div className="voltar">
