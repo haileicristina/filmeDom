@@ -1,3 +1,4 @@
+
 name: Deploy Filme Dom
 
 on:
@@ -18,26 +19,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/checkout@v3
         with:
-          node-version: 16    
-             
-      - name: Build web-app
-        run:
-          npm ci
-          npm run build
+          node-version: 16
 
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+        
       - name: Deploy github pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
 
-    deploy:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: akhileshns/heroku-deploy@v3.12.12
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "filmedom"
-            heroku_email: "abenc.hailei@gmail.com"
+  deploy:    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "filmedom"
+          heroku_email: "abenc.hailei@gmail.com"
