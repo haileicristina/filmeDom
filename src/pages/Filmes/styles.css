@@ -110,20 +110,20 @@
     }
     
     .trailler,
-.datas,
-.votos,
-.salvar,
-.voltar{
-    display:inline-block;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 15px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-right: 10px;
-    opacity:1;
-    transition: all ease 0.2s;
-}
+    .datas,
+    .votos,
+    .salvar,
+    .voltar{
+        display:inline-block;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-right: 10px;
+        opacity:1;
+        transition: all ease 0.2s;
+    }
 
     .poster{
         max-width: 20%;

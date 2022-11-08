@@ -18,11 +18,11 @@ const Row = ({title, path, isLarge}) =>{
    }
    const handleRightArrow = () => {
     let x = scrollx - Math.round(window.innerWidth / 2);
-    let listW = path.results.length * 100;
+    let listW = path.length * 100;
     if((window.innerWidth - listW) > x){
-        x = (window.innerWidth - listW) - 60;
+        x = (window.innerWidth - listW) - 60;        
     }
-    setScrollx(x);
+    setScrollx(x);   
    }
    
     return(
@@ -34,7 +34,7 @@ const Row = ({title, path, isLarge}) =>{
             <div className="movie-left" onClick={handleLeftArrow}>
                 <CaretLeft size={50} weight='bold'/>
             </div>
-            <div className="movie-right" onClick={handleRightArrow}>
+            <div className="movie-right" onClick={handleRightArrow }>
                 <CaretRight size={50} weight='bold'/>
             </div>
 

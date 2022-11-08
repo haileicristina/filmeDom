@@ -25,10 +25,10 @@ function Home(){
             const response = await getMovies();
             console.log('Movies',response);
             
-           const list = response;   
-          
-               
+           const list = response;         
            setMovieList(list);
+          
+
            let originals = list.filter(i => i.name === 'originals');
            const item = originals[0].path;
            let sortMovie = Math.floor(Math.random() * (item.length-1));
