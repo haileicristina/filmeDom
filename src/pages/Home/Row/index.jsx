@@ -18,7 +18,7 @@ const Row = ({title, path, isLarge}) =>{
    }
    const handleRightArrow = () => {
     let x = scrollx - Math.round(window.innerWidth / 2);
-    let listW = path.length * 100;
+    let listW = path.length * 250;
     if((window.innerWidth - listW) > x){
         x = (window.innerWidth - listW) - 60;        
     }
