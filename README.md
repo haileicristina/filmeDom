@@ -62,6 +62,7 @@
     Obs: caso seu arquivo yml tenha sido alterado e esteja diferente no seu repo local(PC) use o git pull origin main,e se houver algum conflito faça um git fetch.
 
 **Github pages link**
+[index](index.html)
 [https://haileicristina.github.io/filmeDom/](https://haileicristina.github.io/filmeDom/)
 
 ## 📁 Acesso ao projeto
